@@ -1,23 +1,13 @@
 <template>
   <div>
-    <header
-      class="text-light text-center py-5"
-      style="background-color: #026c80"
-    >
-      <nav
-        class="navbar navbar-expand-lg text-light"
-        style="background-color: #026c80"
-      >
+    <header class="text-light text-center py-5" style="background-color: #026c80">
+      <nav class="navbar navbar-expand-lg text-light" style="background-color: #026c80">
         <div class="container">
-          <router-link to="/" class="navbar-brand text-light"
-            >Lista de peliculas</router-link
-          >
+          <router-link to="/" class="navbar-brand text-light">Lista de peliculas</router-link>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <router-link to="/inicio" class="nav-link text-light"
-                  >Inicio</router-link
-                >
+                <router-link to="/inicio" class="nav-link text-light">Inicio</router-link>
               </li>
             </ul>
           </div>
@@ -29,70 +19,29 @@
       <div>
         <div class="row mb-3">
           <div class="col-md-4">
-            <input
-              type="text"
-              class="form-control"
-              v-model="searchQuery"
-              placeholder="Buscar por nombre de película"
-            />
+            <input type="text" class="form-control" v-model="searchQuery" placeholder="Buscar por nombre de película" />
           </div>
-          <div class="col-md-4">
-            <select class="form-control" v-model="selectedGenre">
-              <option value="">Todos los géneros</option>
-              <option v-for="genre in genres" :key="genre" :value="genre">
-                {{ genre }}
-              </option>
-            </select>
+          <div class="col-md-4 my-2">
+            <b-form-select v-model="selected" class="form-control" :options="formattedOptions"></b-form-select>
           </div>
           <div class="col-md-4 text-right">
             <button class="btn btn-custom text-white" @click="openSidebar">
-              <b-icon
-                icon="camera-reels-fill"
-                font-scale="1"
-                class="text-white"
-              ></b-icon>
+              <b-icon icon="camera-reels-fill" font-scale="1" class="text-white"></b-icon>
               Agregar
             </button>
-            <b-sidebar
-              id="sidebar-right"
-              title="Agregar Película"
-              right
-              shadow
-              v-model="showSidebar"
-            >
+            <b-sidebar id="sidebar-right" title="Agregar Película" right shadow v-model="showSidebar">
               <div class="px-3 py-2">
                 <div class="mb-3">
-                  <label for="movieTitle" class="form-label"
-                    >Nombre de la película:</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="movieTitle"
-                    v-model="newMovie.title"
-                  />
+                  <label for="movieTitle" class="form-label">Nombre de la película:</label>
+                  <input type="text" class="form-control" id="movieTitle" v-model="newMovie.title" />
                 </div>
                 <div class="mb-3">
                   <label for="movieGenre" class="form-label">Género:</label>
-                  <select
-                    class="form-control"
-                    id="movieGenre"
-                    v-model="newMovie.genre"
-                  >
-                    <option v-for="genre in genres" :key="genre" :value="genre">
-                      {{ genre }}
-                    </option>
-                  </select>
+                  <b-form-select v-model="selected" class="form-control" :options="formattedOptions"></b-form-select>
                 </div>
                 <div class="mb-3">
-                  <label for="movieDescription" class="form-label"
-                    >Descripción:</label
-                  >
-                  <textarea
-                    class="form-control"
-                    id="movieDescription"
-                    v-model="newMovie.description"
-                  ></textarea>
+                  <label for="movieDescription" class="form-label">Descripción:</label>
+                  <textarea class="form-control" id="movieDescription" v-model="newMovie.description"></textarea>
                 </div>
                 <button class="btn btn-primary" @click="registerMovie">
                   Registrar
@@ -103,11 +52,7 @@
         </div>
 
         <div class="row">
-          <div
-            class="col-md-4"
-            v-for="(movie, index) in paginatedMovies"
-            :key="index"
-          >
+          <div class="col-md-4" v-for="(movie, index) in paginatedMovies" :key="index">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">{{ movie.title }}</h5>
@@ -126,12 +71,7 @@
           <div class="col-md-12">
             <nav aria-label="Page navigation example">
               <ul class="pagination justify-content-center">
-                <li
-                  class="page-item"
-                  v-for="page in totalPages"
-                  :key="page"
-                  :class="{ active: page === currentPage }"
-                >
+                <li class="page-item" v-for="page in totalPages" :key="page" :class="{ active: page === currentPage }">
                   <a class="page-link" @click="changePage(page)">{{ page }}</a>
                 </li>
               </ul>
@@ -156,14 +96,23 @@ export default {
       ],
       currentPage: 1,
       moviesPerPage: 3,
-      selectedGenre: null,
+      selected: null,
       searchQuery: '',
       showSidebar: false,
       newMovie: {
         title: '',
         genre: '',
         description: ''
-      }
+      },
+      optionsCategory: [
+        { id: 0, name: "Todos los generos" },
+        { id: 1, name: "Aventura" },
+        { id: 2, name: "Comedia" },
+        { id: 3, name: "Drama" },
+        { id: 4, name: "Accion" },
+        { id: 5, name: "Terror" }
+
+      ]
     };
   },
   computed: {
@@ -184,13 +133,10 @@ export default {
     totalPages() {
       return Math.ceil(this.filteredMovies.length / this.moviesPerPage);
     },
-    genres() {
-      return this.movies.reduce((acc, movie) => {
-        if (!acc.includes(movie.genre)) {
-          acc.push(movie.genre);
-        }
-        return acc;
-      }, []);
+    formattedOptions() {
+      return this.optionsCategory.map(option => {
+        return { text: option.name, value: option.id };
+      });
     }
   },
   methods: {
