@@ -37,6 +37,11 @@ const routes = [
                 path:'/drag',
                 name:'drag',
                 component: () => import('../components/dragandDrop.vue')
+            },
+            {
+                path:'/capchat',
+                name:'capchat',
+                component: () => import('../components/Capchat.vue')
             }
 
 
