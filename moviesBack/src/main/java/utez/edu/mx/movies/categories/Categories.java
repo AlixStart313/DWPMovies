@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import utez.edu.mx.movies.movies.MovieModels;
+import utez.edu.mx.movies.movies.models.MovieModels;
 
 import java.util.List;
 

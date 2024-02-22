@@ -1,4 +1,4 @@
-package utez.edu.mx.movies.movies;
+package utez.edu.mx.movies.movies.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,5 +28,4 @@ public class MovieModels {
     @ManyToOne
     @JoinColumn(name = "gender_id", nullable = false, referencedColumnName = "id")
     private Categories categories;
-
 }

@@ -4,15 +4,16 @@ import lombok.Data;
 import utez.edu.mx.movies.movies.models.MovieModels;
 
 @Data
-public class GetByNameDTO {
-    private String name;
+public class GetByDirectorDTO {
+    private String directorName;
 
-    public MovieModels getByNameDTO(){
+
+    public MovieModels GetByDirectorDTO(){
         return  new MovieModels(
                 null,
-                this.getName(),
                 null,
                 null,
+                this.getDirectorName(),
                 null,
                 null
         );

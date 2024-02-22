@@ -1,12 +1,12 @@
-package utez.edu.mx.movies.movies;
+package utez.edu.mx.movies.movies.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utez.edu.mx.movies.categories.Categories;
-import utez.edu.mx.movies.movies.IMoviesRepository;
 import org.springframework.transaction.annotation.Transactional;
-import utez.edu.mx.movies.movies.MovieModels;
+import utez.edu.mx.movies.movies.models.MovieModels;
+import utez.edu.mx.movies.movies.repository.IMoviesRepository;
 import utez.edu.mx.movies.utils.CustomResponse;
 
 import java.sql.SQLException;

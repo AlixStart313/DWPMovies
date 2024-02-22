@@ -1,8 +1,9 @@
-package utez.edu.mx.movies.movies;
+package utez.edu.mx.movies.movies.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import utez.edu.mx.movies.categories.Categories;
+import utez.edu.mx.movies.movies.models.MovieModels;
 
 import java.util.Date;
 import java.util.List;

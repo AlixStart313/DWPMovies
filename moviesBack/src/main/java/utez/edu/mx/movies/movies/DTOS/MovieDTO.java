@@ -1,8 +1,8 @@
-package utez.edu.mx.movies.movies;
+package utez.edu.mx.movies.movies.DTOS;
 
 import lombok.Data;
 import utez.edu.mx.movies.categories.Categories;
-import utez.edu.mx.movies.movies.MovieModels;
+import utez.edu.mx.movies.movies.models.MovieModels;
 
 import java.util.Date;
 

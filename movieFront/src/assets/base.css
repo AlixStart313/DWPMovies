@@ -72,3 +72,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.navBar-movies{
+  background-color: #026c80 !important;
+  color: #ffffff !important;
+}
