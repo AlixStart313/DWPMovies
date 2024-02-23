@@ -72,3 +72,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@import "@asika32764/vue-animate/dist/vue-animate.css";
+
+/* If you want to override CSS variables, write it just after importing */
+:root {
+  --animate-duration: .3s;
+  --animate-delay: 0;
+}

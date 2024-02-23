@@ -53,6 +53,15 @@
         <b-col>
           <b-card class="text-center mt-3 mb-5">
             <h3>Sin registros</h3>
+            <b-row>
+              <b-col>
+                <TransitionGroup name="bounceDown" tag="div" class="list-group">
+                  <li v-for="item of items" class="list-group-item" :key="item">
+                    {{ item }}
+                  </li>
+                </TransitionGroup>
+              </b-col>
+            </b-row>
           </b-card>
         </b-col>
       </b-row>
@@ -80,30 +89,30 @@ export default {
     };
   },
   methods: {
-      handleDragStart(index) {
-        // Guardamos el índice del elemento arrastrado
-        event.dataTransfer.setData("text/plain", index);
-      },
-      handleDrop(event) {
-        // Prevenir el comportamiento predeterminado
-        event.preventDefault();
-
-        // Obtener el índice del elemento arrastrado
-        const index = event.dataTransfer.getData("text/plain");
-
-        // Obtener el texto del elemento arrastrado
-        const itemText = this.items[index];
-
-        // Obtener el índice del contenedor donde se soltó el elemento
-        const dropIndex = this.items.indexOf(event.target.innerText);
-
-        // Eliminar el elemento de la lista original
-        this.items.splice(index, 1);
-
-        // Insertar el elemento en su nueva posición
-        this.items.splice(dropIndex, 0, itemText);
-      },
+    handleDragStart(index) {
+      // Guardamos el índice del elemento arrastrado
+      event.dataTransfer.setData("text/plain", index);
     },
+    handleDrop(event) {
+      // Prevenir el comportamiento predeterminado
+      event.preventDefault();
+
+      // Obtener el índice del elemento arrastrado
+      const index = event.dataTransfer.getData("text/plain");
+
+      // Obtener el texto del elemento arrastrado
+      const itemText = this.items[index];
+
+      // Obtener el índice del contenedor donde se soltó el elemento
+      const dropIndex = this.items.indexOf(event.target.innerText);
+
+      // Eliminar el elemento de la lista original
+      this.items.splice(index, 1);
+
+      // Insertar el elemento en su nueva posición
+      this.items.splice(dropIndex, 0, itemText);
+    },
+  },
 };
 </script>
 
